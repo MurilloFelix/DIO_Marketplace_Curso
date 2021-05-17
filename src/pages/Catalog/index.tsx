@@ -15,6 +15,7 @@ import {
 } from './styles';
 
 import { formatValue } from '../../utils/formaValue';
+import FloatingCard from '../FloatingCard';
 
 export interface ProductsDataProps {
   id: string;
@@ -67,6 +68,7 @@ const Catalog = () => {
           )}
         />
       </ProductContainer>
+      <FloatingCard />
     </Container>
   );
 };
