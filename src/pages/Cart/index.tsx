@@ -23,6 +23,7 @@ import {
 } from './styles';
 
 import { formatValue } from '../../utils/formaValue'
+import EmptyCart from '../../components/EmptyCart';
 
 export interface ProductsCartProps {
   id: string;
@@ -33,24 +34,7 @@ export interface ProductsCartProps {
 }
 
 const Cart = ()=> {
-  const [ products, setProducts ] = useState<ProductsCartProps[]>([
-    {
-      id: '1',
-      title: 'Assinatura Trimestral',
-      image_url:
-        'https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png',
-      quantity: 1,
-      price: 150,
-    },
-    {
-      id: '2',
-      title: 'Assinatura Anual',
-      image_url:
-        'https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/annual_subscription_qyolci.png',
-      quantity: 2,
-      price: 540,
-    },
-]);
+  const [ products, setProducts ] = useState<ProductsCartProps[]>([]);
 
   const cartSize = useMemo(() =>{
     return products.length || 0;
@@ -71,6 +55,7 @@ const Cart = ()=> {
         <ProductList
           data= {products}
           keyExtractor= {(item)=> item.id}
+          ListEmptyComponent = {<EmptyCart />}
           ListFooterComponent= {<View />}
           ListFooterComponentStyle =  {{
             height: 80,

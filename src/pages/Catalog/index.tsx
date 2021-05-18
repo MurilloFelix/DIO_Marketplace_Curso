@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {View} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
@@ -15,7 +15,9 @@ import {
 } from './styles';
 
 import { formatValue } from '../../utils/formaValue';
+
 import FloatingCard from '../FloatingCard';
+import api from '../../services/api';
 
 export interface ProductsDataProps {
   id: string;
@@ -27,22 +29,16 @@ export interface ProductsDataProps {
 
 
 const Catalog = () => {
-  const [products, setProducts] = useState<ProductsDataProps[]>([
-        {
-          id: '1',
-          title: 'Assinatura Trimestral',
-          image_url:
-            'https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/quarterly_subscription_yjolpc.png',
-          price: 150,
-        },
-        {
-          id: '2',
-          title: 'Assinatura Anual',
-          image_url:
-            'https://res.cloudinary.com/robertosousa1/image/upload/v1594492578/dio/annual_subscription_qyolci.png',
-          price: 540,
-        },
-  ]);
+  const [products, setProducts] = useState<ProductsDataProps[]>([]);
+
+  useEffect(()=>{
+    async function loadProducts() {
+      const { data } = await api.get('/products')
+
+      setProducts(data)
+    }
+    loadProducts()
+  }, [])
 
   return (
     <Container>
