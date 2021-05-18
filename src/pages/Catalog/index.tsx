@@ -21,6 +21,7 @@ export interface ProductsDataProps {
   id: string;
   title: string;
   image_url: string;
+  quantity?: number,
   price: number;
 }
 
